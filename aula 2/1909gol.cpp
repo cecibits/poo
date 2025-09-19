@@ -10,7 +10,8 @@ GoalException:
     - Impedimento:
     p[a]>p[b], para todo b impedido por a
     p[b]>p[a], para todo a impedido por b
-
+a1 -> b1 5
+a1 -> b2 3
 Goal
 - jogador[0-10]
 - time
@@ -18,3 +19,38 @@ Goal
 - F_b
 - P(x,y)
 */
+
+#include <exception>
+#include <iostream>
+#include <string>
+
+enum class TipoInfracao { Falta, Impedimento };
+
+class GoalException: public std::exception {
+    public:
+        std::string jogador_cometeu;
+        std::string jogador_recebeu;
+        //Construtor
+        GoalException(const std::string& cometeu, const std::string& recebeu, TipoInfracao tipo):
+            jogador_cometeu(cometeu), jogador_recebeu(recebeu) {
+                if(tipo == TipoInfracao::Falta) errorMessage = "Ocorreu uma falta de " + jogador_cometeu + "em" + jogador_recebeu + "!";
+                else if(tipo == TipoInfracao::Impedimento) errorMessage = "Ocorreu um impedimento de " + jogador_cometeu + "em" + jogador_recebeu + "!";
+            }
+        const char* what() const noexcept override {
+            return errorMessage.c_str();
+        }
+    private:
+        std::string errorMessage;
+};
+
+class Goal {
+    public:
+        std::string jogador_cometeu;
+        std::string jogador_recebeu;
+        std::string time;
+        
+
+        Goal(const std::string& cometeu, const std::string& recebeu)
+}
+
+bool falta()
