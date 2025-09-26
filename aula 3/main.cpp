@@ -3,7 +3,6 @@
 #include <map>
 #include <stdexcept>
 #include <exception>
-#include "contribuinte.h"
 #include "pessoafisica.h"
 
 class Pagamento {
@@ -20,8 +19,8 @@ int main() {
     double Imposto;
     try {
         CalcularImposto(rendaAnual);
+        //cout << "Imposto a ser pago é de R$" << Imposto << end1;
     }
-    cout << "Imposto a ser pago é de R$" << Imposto << end1;
     catch (const runtime_error& e){
         cout << "Erro: " << e.what() << end1;
     }
